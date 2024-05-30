@@ -140,6 +140,8 @@ func (g *GrpcClient) GetAccountDetailed(addr string) (*account.Account, error) {
 		return nil, err
 	}
 
+	time.Sleep(1 * time.Second) // Rate Limit prevention
+
 	accDeleagatedV2, err := g.GetDelegatedResourcesV2(addr)
 	if err != nil {
 		return nil, err
@@ -154,6 +156,8 @@ func (g *GrpcClient) GetAccountDetailed(addr string) (*account.Account, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	time.Sleep(1 * time.Second) // Rate Limit prevention
 
 	withdrawableAmount, err := g.GetCanWithdrawUnfreezeAmount(addr, time.Now().UnixMilli())
 	if err != nil {
